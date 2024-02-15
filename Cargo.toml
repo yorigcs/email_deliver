@@ -2,7 +2,21 @@
 name = "email_deliver"
 version = "0.1.0"
 edition = "2021"
+authors = ["Yorí <yorigcsdev@gmail.com.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/main.rs"
+name = "email_deliver"
 
 [dependencies]
+axum = "0.7.4"
+http-body-util = "0.1.0"
+tokio = { version = "1.36.0", features = ["full"]}
+serde_json = "1.0.113"
+
+[dev-dependencies]
+tower = { version = "0.4", features = ["util"] }
