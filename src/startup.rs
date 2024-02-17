@@ -1,16 +1,16 @@
 use axum::Router;
-use axum::routing::{get, post};
+use sqlx::postgres::PgPool;
 use tokio::net::TcpListener;
-use crate::routes:: {status, subscribe};
+use crate::routes::{health_check_routes, subscriptions_routes};
 
-pub async fn run(listener: TcpListener) -> std::io::Result<()>{
-    axum::serve(listener, routes()).await.unwrap();
+pub async fn run(listener: TcpListener, pool: PgPool) -> std::io::Result<()>{
+    let app = app().with_state(pool.clone());
+    axum::serve(listener, app).await.unwrap();
     Ok(())
 }
 
-pub fn routes() -> Router {
+pub fn app() -> Router<PgPool> {
     Router::new()
-        .route("/health_check", get(status))
-        .route("/subscriptions", post(subscribe))
-
+        .merge(subscriptions_routes())
+        .merge(health_check_routes())
 }

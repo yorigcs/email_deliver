@@ -4,11 +4,14 @@ use axum::http::{ StatusCode };
 use http_body_util::BodyExt;
 use serde_json::{json, Value};
 use tower::ServiceExt;
-use email_deliver::startup::routes;
+mod helpers;
+use helpers::TestApp;
 
 #[tokio::test]
 async fn health_check_works() {
-    let response =  routes()
+    let TestApp{ db_pool, app}  = TestApp::new().await;
+
+    let response =  app.with_state(db_pool.clone())
         .oneshot(
             Request::builder()
                 .uri("/health_check")

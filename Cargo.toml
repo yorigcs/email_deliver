@@ -20,6 +20,8 @@ serde_json = "1.0.113"
 mime = "0.3.17"
 serde = { version = "1.0.196", features = ["derive"] }
 config = "0.14.0"
+uuid = { version = "1.7.0", features = ["v4"] }
+chrono = "0.4.34"
 [dependencies.sqlx]
 version = "0.7.3"
 default-features = false
