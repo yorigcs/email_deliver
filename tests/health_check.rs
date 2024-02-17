@@ -1,6 +1,6 @@
 use axum::body::Body;
 use axum::extract::Request;
-use axum::http::{ StatusCode };
+use axum::http::StatusCode;
 use http_body_util::BodyExt;
 use serde_json::{json, Value};
 use tower::ServiceExt;
@@ -9,16 +9,18 @@ use helpers::TestApp;
 
 #[tokio::test]
 async fn health_check_works() {
-    let TestApp{ db_pool, app}  = TestApp::new().await;
+    let TestApp { db_pool, app } = TestApp::new().await;
 
-    let response =  app.with_state(db_pool.clone())
+    let response = app
+        .with_state(db_pool.clone())
         .oneshot(
             Request::builder()
                 .uri("/health_check")
                 .body(Body::empty())
-                .unwrap()
+                .unwrap(),
         )
-        .await.unwrap();
+        .await
+        .unwrap();
 
     assert_eq!(response.status(), StatusCode::OK);
 
