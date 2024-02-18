@@ -5,6 +5,7 @@ use serde_json::{json, Value};
 use sqlx::PgPool;
 
 async fn status(State(_pool): State<PgPool>) -> Json<Value> {
+    tracing::info!("Okay");
     Json(json!({"status": "Ok"}))
 }
 

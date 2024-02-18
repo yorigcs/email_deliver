@@ -15,13 +15,17 @@ name = "email_deliver"
 [dependencies]
 axum = "0.7.4"
 http-body-util = "0.1.0"
-tokio = { version = "1.36.0", features = ["macros", "rt-multi-thread"]}
+tokio = { version = "1.36.0", features = ["full"]}
 serde_json = "1.0.113"
 mime = "0.3.17"
 serde = { version = "1.0.196", features = ["derive"] }
 config = "0.14.0"
 uuid = { version = "1.7.0", features = ["v4"] }
 chrono = "0.4.34"
+tracing = "0.1.40"
+tracing-subscriber = {version = "0.3.18", features = ["env-filter"]}
+tower-http = { version = "0.5.1", features = ["trace"] }
+
 [dependencies.sqlx]
 version = "0.7.3"
 default-features = false

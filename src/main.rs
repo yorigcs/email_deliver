@@ -13,7 +13,7 @@ async fn main() -> std::io::Result<()> {
         .await
         .expect("Failed to connect to Postgres.");
 
-    let address = dbg!(format!("127.0.0.1:{}", configuration.application_port));
+    let address = format!("127.0.0.1:{}", configuration.application_port);
     let listener = tokio::net::TcpListener::bind(address).await.unwrap();
     run(listener, pool).await
 }
