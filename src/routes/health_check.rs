@@ -3,9 +3,10 @@ use axum::routing::get;
 use axum::{Json, Router};
 use serde_json::{json, Value};
 use sqlx::PgPool;
+use tracing::info;
 
 async fn status(State(_pool): State<PgPool>) -> Json<Value> {
-    tracing::info!("Okay");
+    info!("Okay");
     Json(json!({"status": "Ok"}))
 }
 
