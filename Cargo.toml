@@ -17,6 +17,7 @@ axum = "0.7.4"
 http-body-util = "0.1.0"
 tokio = { version = "1.36.0", features = ["full"]}
 serde_json = "1.0.113"
+serde-aux = "4.4.0"
 mime = "0.3.17"
 serde = { version = "1.0.196", features = ["derive"] }
 config = "0.14.0"
